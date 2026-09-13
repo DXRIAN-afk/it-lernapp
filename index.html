@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>IT-Lexikon – Begriffe &amp; Dateiendungen lernen</title>
+<meta name="description" content="Lern-App für IT-Abkürzungen, Programmierbegriffe und Dateiendungen – mit Karteikarten, Quiz und Lernfortschritt." />
+<meta name="theme-color" content="#6d5efc" />
+<link rel="manifest" href="manifest.json" />
+<link rel="icon" href="icons/icon.svg" type="image/svg+xml" />
+<link rel="apple-touch-icon" href="icons/icon-180.png" />
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<div id="app">
+
+  <header id="app-header">
+    <button id="btn-back" class="icon-btn" hidden aria-label="Zurück">
+      <svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <h1 id="header-title">IT-Lexikon</h1>
+    <button id="btn-settings" class="icon-btn" aria-label="Einstellungen">
+      <svg viewBox="0 0 24 24"><path d="M10.3 3.2h3.4l.4 2c.6.2 1.2.5 1.7.8l1.9-.8 2.4 2.4-.8 1.9c.3.5.6 1.1.8 1.7l2 .4v3.4l-2 .4c-.2.6-.5 1.2-.8 1.7l.8 1.9-2.4 2.4-1.9-.8c-.5.3-1.1.6-1.7.8l-.4 2h-3.4l-.4-2a7.4 7.4 0 0 1-1.7-.8l-1.9.8-2.4-2.4.8-1.9a7.4 7.4 0 0 1-.8-1.7l-2-.4v-3.4l2-.4c.2-.6.5-1.2.8-1.7l-.8-1.9 2.4-2.4 1.9.8c.5-.3 1.1-.6 1.7-.8z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+    </button>
+  </header>
+
+  <main id="app-main">
+
+    <!-- ============================== HOME ============================== -->
+    <section id="view-home" class="view active">
+      <p class="greeting" id="greeting-text">Was möchtest du heute lernen?</p>
+
+      <div class="daily-card">
+        <div class="daily-card-row">
+          <span class="daily-card-label">Heute gelernt</span>
+          <span class="daily-card-value" id="home-daily-value">0 / 10</span>
+        </div>
+        <div class="progress-bar"><div class="progress-bar-fill" id="home-daily-bar"></div></div>
+      </div>
+
+      <div class="category-grid">
+        <button class="category-card" data-group="coding">
+          <span class="category-icon"><svg viewBox="0 0 24 24"><path d="M9 8l-4 4 4 4M15 8l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span class="category-title">App-Coding</span>
+          <span class="category-desc">Lerne wichtige Begriffe und Abkürzungen rund ums Programmieren.</span>
+          <span class="category-count" id="count-coding">0 Begriffe</span>
+        </button>
+        <button class="category-card" data-group="files">
+          <span class="category-icon"><svg viewBox="0 0 24 24"><path d="M3 7a1 1 0 0 1 1-1h4.7l1.8 1.8H20a1 1 0 0 1 1 1V17a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V7z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg></span>
+          <span class="category-title">Dateien &amp; Downloads</span>
+          <span class="category-desc">Lerne Dateiendungen, Formate und ihre Verwendung.</span>
+          <span class="category-count" id="count-files">0 Begriffe</span>
+        </button>
+      </div>
+
+      <div class="stat-grid">
+        <div class="stat-tile"><span class="stat-num" id="stat-learned">0</span><span class="stat-label">Begriffe gelernt</span></div>
+        <div class="stat-tile"><span class="stat-num" id="stat-streak">0</span><span class="stat-label">Tage-Streak</span></div>
+        <div class="stat-tile"><span class="stat-num" id="stat-errorrate">0%</span><span class="stat-label">Fehlerquote</span></div>
+        <div class="stat-tile"><span class="stat-num" id="stat-quizacc">0%</span><span class="stat-label">Quiz-Trefferquote</span></div>
+      </div>
+
+      <div class="section-card">
+        <h3>Gesamtfortschritt</h3>
+        <div class="progress-bar"><div class="progress-bar-fill" id="overall-bar"></div></div>
+        <p id="overall-text">0 / 101 Begriffe gelernt</p>
+        <div class="mini-legend">
+          <span><i class="dot dot-known"></i>Gewusst: <b id="legend-known">0</b></span>
+          <span><i class="dot dot-unknown"></i>Noch zu lernen: <b id="legend-unknown">0</b></span>
+        </div>
+      </div>
+
+      <div class="action-grid">
+        <button class="action-btn" data-action="flashcards">
+          <span class="action-icon"><svg viewBox="0 0 24 24"><rect x="4" y="6" width="13" height="13" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M8 6V4.5A1.5 1.5 0 0 1 9.5 3H18a1.5 1.5 0 0 1 1.5 1.5V16" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></span>
+          Karteikarten lernen
+        </button>
+        <button class="action-btn" data-action="quiz">
+          <span class="action-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M9.5 9.3a2.5 2.5 0 1 1 3.6 2.2c-.8.4-1.1.8-1.1 1.7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="16.7" r="0.9" fill="currentColor"/></svg></span>
+          Quiz starten
+        </button>
+        <button class="action-btn full-width" data-action="terms">
+          <span class="action-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M21 21l-4.3-4.3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span>
+          Alle Begriffe
+        </button>
+      </div>
+    </section>
+
+    <!-- ============================ FLASHCARDS ============================ -->
+    <section id="view-flashcards" class="view">
+
+      <div id="flash-setup" class="setup-box">
+        <h2 class="setup-title">Karteikarten</h2>
+        <p class="setup-hint">Wähle einen Bereich zum Lernen.</p>
+        <div class="chip-row" id="flash-scope-chips">
+          <button class="chip active" data-scope="all">Alle</button>
+          <button class="chip" data-scope="coding">App-Coding</button>
+          <button class="chip" data-scope="files">Dateien &amp; Downloads</button>
+        </div>
+        <button class="primary-btn" id="btn-flash-start">Lernen starten</button>
+      </div>
+
+      <div id="flash-session" class="flash-session" hidden>
+        <div class="flash-topbar">
+          <span id="flash-progress-label">1 / 10</span>
+          <div class="progress-bar small"><div class="progress-bar-fill" id="flash-progress-bar"></div></div>
+          <button class="icon-btn" id="btn-flash-close" aria-label="Beenden">
+            <svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </button>
+        </div>
+
+        <div class="flip-card-wrap">
+          <div class="flip-card" id="flip-card">
+            <div class="flip-card-inner" id="flip-card-inner">
+              <div class="flip-card-face flip-card-front">
+                <span class="flash-badge" id="flash-front-badge">Begriff</span>
+                <span class="flash-term" id="flash-front-term">API</span>
+                <span class="flash-hint" id="flash-front-hint">Was bedeutet das?</span>
+                <span class="tap-hint">Tippen zum Umdrehen</span>
+              </div>
+              <div class="flip-card-face flip-card-back">
+                <div class="flash-back-content" id="flash-back-content"></div>
+              </div>
+            </div>
+          </div>
+          <div class="swipe-indicator swipe-left" id="swipe-left">Nicht gewusst</div>
+          <div class="swipe-indicator swipe-right" id="swipe-right">Gewusst</div>
+        </div>
+
+        <div class="flash-actions">
+          <button class="answer-btn answer-no" id="btn-not-known">Nicht gewusst</button>
+          <button class="answer-btn answer-yes" id="btn-known">Gewusst</button>
+        </div>
+        <p class="swipe-tip">Tipp: Karte nach links oder rechts wischen</p>
+      </div>
+
+      <div id="flash-summary" class="summary-box" hidden>
+        <h2>Runde geschafft</h2>
+        <div class="summary-stats">
+          <div class="summary-stat"><span class="summary-num" id="sum-correct">0</span><span>Gewusst</span></div>
+          <div class="summary-stat"><span class="summary-num" id="sum-wrong">0</span><span>Zu üben</span></div>
+        </div>
+        <button class="primary-btn" id="btn-flash-again">Weitere Runde</button>
+        <button class="secondary-btn" id="btn-flash-home">Zur Startseite</button>
+      </div>
+    </section>
+
+    <!-- =============================== QUIZ =============================== -->
+    <section id="view-quiz" class="view">
+
+      <div id="quiz-setup" class="setup-box">
+        <h2 class="setup-title">Quiz</h2>
+        <p class="setup-hint">Teste dein Wissen mit gemischten Fragen.</p>
+        <div class="chip-row" id="quiz-scope-chips">
+          <button class="chip active" data-scope="all">Alle</button>
+          <button class="chip" data-scope="coding">App-Coding</button>
+          <button class="chip" data-scope="files">Dateien &amp; Downloads</button>
+        </div>
+        <div class="chip-row" id="quiz-length-chips">
+          <button class="chip" data-len="5">5 Fragen</button>
+          <button class="chip active" data-len="10">10 Fragen</button>
+          <button class="chip" data-len="15">15 Fragen</button>
+        </div>
+        <button class="primary-btn" id="btn-quiz-start">Quiz starten</button>
+      </div>
+
+      <div id="quiz-session" class="quiz-session" hidden>
+        <div class="flash-topbar">
+          <span id="quiz-progress-label">Frage 1 / 10</span>
+          <div class="progress-bar small"><div class="progress-bar-fill" id="quiz-progress-bar"></div></div>
+          <button class="icon-btn" id="btn-quiz-close" aria-label="Beenden">
+            <svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </button>
+        </div>
+
+        <div class="quiz-card">
+          <p class="quiz-question" id="quiz-question"></p>
+          <div class="quiz-options" id="quiz-options"></div>
+          <div class="quiz-feedback" id="quiz-feedback" hidden>
+            <p class="quiz-feedback-title" id="quiz-feedback-title"></p>
+            <p class="quiz-feedback-text" id="quiz-feedback-text"></p>
+            <button class="primary-btn" id="btn-quiz-next">Weiter</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="quiz-summary" class="summary-box" hidden>
+        <h2>Quiz beendet</h2>
+        <p class="quiz-score" id="quiz-score">0 / 10 richtig</p>
+        <div class="progress-bar"><div class="progress-bar-fill" id="quiz-score-bar"></div></div>
+        <button class="primary-btn" id="btn-quiz-again">Nochmal spielen</button>
+        <button class="secondary-btn" id="btn-quiz-home">Zur Startseite</button>
+      </div>
+    </section>
+
+    <!-- =============================== TERMS =============================== -->
+    <section id="view-terms" class="view">
+      <div class="search-box">
+        <svg class="search-icon" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/><path d="M21 21l-4.3-4.3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        <input id="search-input" type="search" placeholder="Begriff, Abkürzung oder Endung suchen…" autocomplete="off" />
+      </div>
+      <div class="chip-row" id="terms-scope-chips">
+        <button class="chip active" data-scope="all">Alle</button>
+        <button class="chip" data-scope="coding">App-Coding</button>
+        <button class="chip" data-scope="files">Dateien &amp; Downloads</button>
+      </div>
+      <div id="terms-list" class="terms-list"></div>
+      <p id="terms-empty" class="empty-hint" hidden>Keine Treffer gefunden.</p>
+    </section>
+
+    <!-- ============================== DETAIL ============================== -->
+    <section id="view-detail" class="view">
+      <div id="detail-content" class="detail-content"></div>
+    </section>
+
+    <!-- ============================= SETTINGS ============================= -->
+    <section id="view-settings" class="view">
+      <div class="section-card">
+        <h3>Design</h3>
+        <div class="chip-row" id="theme-chips">
+          <button class="chip" data-theme="system">System</button>
+          <button class="chip" data-theme="light">Hell</button>
+          <button class="chip" data-theme="dark">Dunkel</button>
+        </div>
+      </div>
+
+      <div class="section-card">
+        <h3>Tagesziel</h3>
+        <div class="goal-row">
+          <span>Karten pro Tag</span>
+          <select id="goal-select">
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="15">15</option>
+            <option value="20">20</option>
+            <option value="30">30</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="section-card">
+        <h3>Lernfortschritt</h3>
+        <p>Setzt alle gespeicherten Karten, Ergebnisse und Statistiken unwiderruflich zurück.</p>
+        <button class="secondary-btn danger" id="btn-reset-progress">Lernfortschritt zurücksetzen</button>
+      </div>
+    </section>
+
+  </main>
+
+  <div class="add-nav" id="add-nav">
+    <a href="#" class="add-nav-item nav-btn active" data-view="home" title="Home" aria-label="Home">
+      <svg viewBox="0 0 24 24"><path d="M4 11l8-7 8 7v9a1 1 0 0 1-1 1h-4v-6H9v6H5a1 1 0 0 1-1-1z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+    </a>
+    <a href="#" class="add-nav-item nav-btn" data-view="flashcards" title="Lernen" aria-label="Lernen">
+      <svg viewBox="0 0 24 24"><rect x="4" y="6" width="13" height="13" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M8 6V4.5A1.5 1.5 0 0 1 9.5 3H18a1.5 1.5 0 0 1 1.5 1.5V16" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>
+    </a>
+    <a href="#" class="add-nav-item nav-btn" data-view="quiz" title="Quiz" aria-label="Quiz">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M9.5 9.3a2.5 2.5 0 1 1 3.6 2.2c-.8.4-1.1.8-1.1 1.7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="16.7" r="0.9" fill="currentColor"/></svg>
+    </a>
+    <a href="#" class="add-nav-item nav-btn" data-view="terms" title="Begriffe" aria-label="Begriffe">
+      <svg viewBox="0 0 24 24"><path d="M5 4h11l3 3v13a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M8 10h8M8 14h8M8 18h5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+    </a>
+  </div>
+</div>
+
+<div id="toast" class="toast" hidden></div>
+
+<script src="js/data.js"></script>
+<script src="js/storage.js"></script>
+<script src="js/srs.js"></script>
+<script src="js/quiz.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
