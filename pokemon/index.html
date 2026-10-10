@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Retro PC 95</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Boot-Bildschirm -->
+  <div id="boot">
+    <pre id="boot-text"></pre>
+  </div>
+
+  <!-- Herunterfahren -->
+  <div id="shutdown" class="hidden">
+    <p>Sie können den Computer jetzt ausschalten.</p>
+    <button class="btn" id="restart-btn">Neu starten</button>
+  </div>
+
+  <!-- Desktop -->
+  <div id="desktop" class="hidden">
+    <div id="icons"></div>
+    <div id="windows"></div>
+
+    <div id="start-menu" class="hidden">
+      <div class="start-side"><span>Retro<b>95</b></span></div>
+      <ul id="start-items"></ul>
+    </div>
+
+    <div id="taskbar">
+      <button id="start-btn" class="btn"><span class="logo">⊞</span> <b>Start</b></button>
+      <div id="tasks"></div>
+      <div id="tray"><span id="clock">00:00</span></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

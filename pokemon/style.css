@@ -1,0 +1,236 @@
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+  font-family: "MS Sans Serif", "Microsoft Sans Serif", Tahoma, Arial, sans-serif;
+  font-size: 12px;
+  user-select: none;
+  background: #000;
+}
+
+.hidden { display: none !important; }
+
+/* ---------- 3D-Rahmen im Stil von Windows 95 ---------- */
+.raised {
+  background: #c0c0c0;
+  box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #fff,
+              inset -2px -2px #808080, inset 2px 2px #dfdfdf;
+}
+.sunken {
+  background: #fff;
+  box-shadow: inset -1px -1px #fff, inset 1px 1px #808080,
+              inset -2px -2px #dfdfdf, inset 2px 2px #0a0a0a;
+}
+.btn {
+  font: inherit;
+  background: #c0c0c0;
+  border: none;
+  padding: 4px 12px;
+  min-width: 70px;
+  cursor: pointer;
+  box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #fff,
+              inset -2px -2px #808080, inset 2px 2px #dfdfdf;
+}
+.btn:active, .btn.pressed {
+  box-shadow: inset -1px -1px #fff, inset 1px 1px #0a0a0a,
+              inset -2px -2px #dfdfdf, inset 2px 2px #808080;
+  padding: 5px 11px 3px 13px;
+}
+
+/* ---------- Boot ---------- */
+#boot {
+  position: fixed; inset: 0;
+  background: #000; color: #c0c0c0;
+  font-family: "Courier New", monospace;
+  font-size: 16px;
+  padding: 20px;
+  z-index: 9999;
+}
+#boot pre { margin: 0; white-space: pre-wrap; font-family: inherit; }
+
+#shutdown {
+  position: fixed; inset: 0;
+  background: #000; color: #ff8c00;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  font-size: 28px; gap: 30px;
+  z-index: 9999;
+}
+
+/* ---------- Desktop ---------- */
+#desktop {
+  position: fixed; inset: 0;
+  background: #008080;
+}
+#icons {
+  position: absolute; top: 8px; left: 8px; bottom: 40px;
+  display: flex; flex-direction: column; flex-wrap: wrap;
+  gap: 14px; align-content: flex-start;
+}
+.icon {
+  width: 76px;
+  display: flex; flex-direction: column; align-items: center;
+  color: #fff; text-align: center; cursor: pointer;
+  padding: 2px;
+}
+.icon .pic { font-size: 32px; line-height: 40px; filter: drop-shadow(1px 1px 0 #000); }
+.icon .label { padding: 1px 3px; margin-top: 2px; }
+.icon.selected .label { background: #000080; outline: 1px dotted #fff; }
+.icon.selected .pic { filter: drop-shadow(1px 1px 0 #000) brightness(0.6) sepia(1) hue-rotate(190deg) saturate(4); }
+
+/* ---------- Taskleiste ---------- */
+#taskbar {
+  position: absolute; left: 0; right: 0; bottom: 0; height: 34px;
+  background: #c0c0c0;
+  box-shadow: inset 0 1px #dfdfdf, inset 0 2px #fff;
+  display: flex; align-items: center; gap: 4px; padding: 3px 3px 2px;
+  z-index: 5000;
+}
+#start-btn { min-width: 0; padding: 3px 8px; display: flex; align-items: center; gap: 4px; height: 26px; }
+#start-btn .logo { color: #000080; font-size: 16px; }
+#tasks { flex: 1; display: flex; gap: 3px; overflow: hidden; }
+#tasks .btn {
+  width: 160px; text-align: left; height: 26px;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+#tasks .btn.pressed { background: repeating-conic-gradient(#c0c0c0 0 25%, #fff 0 50%) 0 0 / 2px 2px; font-weight: bold; }
+#tray {
+  height: 26px; padding: 0 10px; display: flex; align-items: center;
+  box-shadow: inset -1px -1px #fff, inset 1px 1px #808080;
+}
+
+/* ---------- Startmenü ---------- */
+#start-menu {
+  position: absolute; left: 2px; bottom: 34px;
+  display: flex; min-width: 200px;
+  background: #c0c0c0;
+  box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #dfdfdf,
+              inset -2px -2px #808080, inset 2px 2px #fff;
+  padding: 3px;
+  z-index: 6000;
+}
+.start-side {
+  width: 24px; background: linear-gradient(#000080, #1084d0);
+  display: flex; align-items: flex-end; justify-content: center;
+}
+.start-side span {
+  writing-mode: vertical-rl; transform: rotate(180deg);
+  color: #c0c0c0; font-size: 18px; padding: 6px 0;
+}
+.start-side b { color: #fff; }
+#start-items { list-style: none; margin: 0; padding: 0; flex: 1; }
+#start-items li {
+  display: flex; align-items: center; gap: 10px;
+  padding: 6px 20px 6px 6px; cursor: pointer; font-size: 13px;
+}
+#start-items li .pic { font-size: 22px; width: 28px; text-align: center; }
+#start-items li:hover { background: #000080; color: #fff; }
+#start-items hr { border: none; border-top: 1px solid #808080; border-bottom: 1px solid #fff; margin: 3px 2px; }
+
+/* ---------- Fenster ---------- */
+.window {
+  position: absolute;
+  display: flex; flex-direction: column;
+  padding: 3px;
+  min-width: 200px; min-height: 120px;
+  background: #c0c0c0;
+  box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #dfdfdf,
+              inset -2px -2px #808080, inset 2px 2px #fff;
+}
+.window.maximized { left: 0 !important; top: 0 !important; width: 100% !important; height: calc(100% - 34px) !important; }
+.titlebar {
+  background: linear-gradient(90deg, #808080, #b5b5b5);
+  color: #c0c0c0; font-weight: bold;
+  display: flex; align-items: center; gap: 4px;
+  padding: 2px 2px 2px 4px; height: 20px;
+  cursor: move;
+}
+.window.active .titlebar { background: linear-gradient(90deg, #000080, #1084d0); color: #fff; }
+.titlebar .title { flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.titlebar button {
+  width: 16px; height: 14px; min-width: 0; padding: 0;
+  font-size: 10px; font-weight: bold; line-height: 10px;
+  font-family: Arial, sans-serif;
+}
+.titlebar button:active { padding: 1px 0 0 1px; }
+.titlebar button.close { margin-left: 2px; }
+.menubar { display: flex; padding: 2px 0; }
+.menubar span { padding: 1px 6px; }
+.menubar span:first-letter { text-decoration: underline; }
+.menubar span:hover { box-shadow: inset -1px -1px #808080, inset 1px 1px #fff; }
+.content { flex: 1; overflow: auto; position: relative; margin-top: 2px; }
+.resizer { position: absolute; right: 0; bottom: 0; width: 14px; height: 14px; cursor: nwse-resize; }
+.statusbar { display: flex; gap: 2px; margin-top: 2px; }
+.statusbar div { flex: 1; padding: 2px 4px; box-shadow: inset -1px -1px #fff, inset 1px 1px #808080; }
+
+/* ---------- Apps ---------- */
+.notepad textarea {
+  width: 100%; height: 100%; border: none; resize: none; outline: none;
+  font-family: "Fixedsys", "Courier New", monospace; font-size: 14px; padding: 4px;
+}
+
+.explorer { display: flex; flex-wrap: wrap; gap: 10px; padding: 10px; align-content: flex-start; }
+.explorer .icon { color: #000; }
+.explorer .icon .pic { filter: none; }
+.explorer .icon.selected .label { color: #fff; }
+
+.calc { padding: 8px; display: flex; flex-direction: column; gap: 8px; height: 100%; }
+.calc .display { text-align: right; font-size: 20px; padding: 4px 8px; font-family: "Courier New", monospace; }
+.calc .keys { display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px; flex: 1; }
+.calc .keys .btn { min-width: 0; padding: 4px; font-size: 14px; }
+.calc .keys .op { color: #c00000; }
+
+.paint { display: flex; height: 100%; gap: 4px; }
+.paint .tools { display: flex; flex-direction: column; gap: 4px; padding: 4px; }
+.paint .palette { display: grid; grid-template-columns: repeat(2, 20px); gap: 2px; }
+.paint .swatch { width: 20px; height: 20px; cursor: pointer; box-shadow: inset -1px -1px #fff, inset 1px 1px #808080; }
+.paint .swatch.sel { outline: 2px solid #000; }
+.paint .canvas-wrap { flex: 1; background: #808080; overflow: auto; padding: 4px; }
+.paint canvas { background: #fff; cursor: crosshair; display: block; }
+.paint select { font: inherit; }
+
+.mines { padding: 6px; display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.mines .head { display: flex; justify-content: space-between; align-items: center; width: 100%; padding: 4px 6px; }
+.mines .lcd { background: #000; color: #f00; font-family: "Courier New", monospace; font-size: 20px; font-weight: bold; padding: 0 4px; min-width: 46px; text-align: center; }
+.mines .face { min-width: 0; width: 30px; height: 30px; padding: 0; font-size: 18px; }
+.mines .grid { display: grid; padding: 3px; }
+.mines .cell {
+  width: 20px; height: 20px; font-weight: bold; font-size: 13px;
+  display: flex; align-items: center; justify-content: center; cursor: default;
+  background: #c0c0c0;
+  box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #fff, inset -2px -2px #808080, inset 2px 2px #dfdfdf;
+}
+.mines .cell.open { box-shadow: inset 1px 1px #808080; }
+.mines .cell.boom { background: #f00; }
+
+.dos {
+  background: #000; color: #c0c0c0; height: 100%;
+  font-family: "Courier New", monospace; font-size: 14px; padding: 4px;
+  overflow-y: auto; white-space: pre-wrap; cursor: text;
+}
+.dos input {
+  background: transparent; border: none; outline: none; color: inherit;
+  font: inherit; width: 70%; caret-color: #c0c0c0;
+}
+
+.pokedex { display: flex; height: 100%; gap: 6px; padding: 6px; background: #c0c0c0; }
+.pokedex .list { width: 150px; overflow-y: auto; }
+.pokedex .list div { padding: 2px 6px; cursor: pointer; }
+.pokedex .list div.sel { background: #000080; color: #fff; }
+.pokedex .detail { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 10px; overflow: auto; }
+.pokedex .screen {
+  width: 140px; height: 140px; background: #9bbc0f;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 72px; border: 4px solid #306230;
+}
+.pokedex .screen img { image-rendering: pixelated; width: 128px; height: 128px; }
+.pokedex h2 { margin: 4px 0 0; font-size: 18px; }
+.pokedex .types span { display: inline-block; padding: 1px 8px; margin: 0 2px; color: #fff; border: 1px solid #000; font-weight: bold; }
+.pokedex table { border-collapse: collapse; }
+.pokedex td { padding: 1px 8px; }
+
+.dialog { display: flex; gap: 14px; padding: 14px; align-items: flex-start; }
+.dialog .pic { font-size: 32px; }
+.dialog-buttons { display: flex; justify-content: center; padding-bottom: 10px; }
